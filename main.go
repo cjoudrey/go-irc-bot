@@ -91,7 +91,6 @@ bot.privmsg = function(target, message)
 end
 
 bot.on("PING", function(prefix, params)
-	print("PING? PONG!")
 	bot.write("PONG " .. params[1])
 end)
 	`); err != nil {
