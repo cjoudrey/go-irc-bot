@@ -55,7 +55,7 @@ func main() {
 
 	fmt.Printf("Connecting to %s:%d as %s\n", *host, *port, *nickname)
 
-	go client.Connect()
+	client.Connect()
 
 	select {}
 }
