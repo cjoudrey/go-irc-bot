@@ -6,11 +6,15 @@ local magic8ball = {"It is certain", "It is decidedly so", "Without a doubt", "Y
 
 math.randomseed(os.time())
 
-bot.on("PRIVMSG", function(prefix, params)
-  target = params[1]
-  message = params[2]
-
-  if string.sub(target, 1, 1) == "#" and string.sub(message, 1, 7) == "!8ball " then
-    bot.privmsg(target, magic8ball[math.random(#magic8ball)])
+-- Whenever someone types "!8ball message" the bot will
+-- reply to the person directly or in the channel that
+-- it was typed in.
+bot.add_command("!8ball", function(nick, target, message)
+  if message ~= "" then
+    if string.sub(target, 1, 1) == "#" then
+      bot.privmsg(target, nick .. ": " .. magic8ball[math.random(#magic8ball)])
+    else
+      bot.privmsg(nick, magic8ball[math.random(#magic8ball)])
+    end
   end
 end)
