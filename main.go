@@ -15,11 +15,18 @@ func main() {
 	var secure = flag.Bool("secure", false, "connect over tls")
 	var password = flag.String("password", "", "password")
 
+	flag.Usage = func() {
+		fmt.Fprintf(os.Stderr, "Usage: %s [options...] <script.lua>\n", os.Args[0])
+		fmt.Fprint(os.Stderr, "\n")
+		fmt.Fprint(os.Stderr, "Options:\n")
+		fmt.Fprint(os.Stderr, "\n")
+		flag.PrintDefaults()
+	}
+
 	flag.Parse()
 
 	if flag.Arg(0) == "" {
-		fmt.Fprintf(os.Stderr, "Usage: %s [options...] <script.lua>\n", os.Args[0])
-		flag.PrintDefaults()
+		flag.Usage()
 		return
 	}
 

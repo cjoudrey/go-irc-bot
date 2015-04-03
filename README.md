@@ -7,7 +7,10 @@
 ## Usage
 
 ```
-go-irc-bot [options...] <script.lua>
+Usage: ./go-irc-bot [options...] <script.lua>
+
+Options:
+
   -host="irc.freenode.net": host to connect to
   -ident="go-irc-bot": ident
   -nickname="go-irc-bot": nickname
