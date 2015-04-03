@@ -11,6 +11,7 @@ bot.add_command = function(command, callback)
   end)
 end
 
+require("examples/nickserv")
 require("examples/8ball")
 
 -- 001 is the event that happens when bot connects to server
