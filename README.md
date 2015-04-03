@@ -36,6 +36,8 @@ i.e. `bot.write("JOIN #go-nuts")`
 
 Bind a handler to a given event.
 
+Events map directly to what the IRC server sends to the client. For instance, if server sends `PRIVMSG` the event will be `PRIVMSG`.
+
 An event can have many handlers.
 
 `prefix` is the IRC message prefix.
