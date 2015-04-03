@@ -17,17 +17,17 @@ go-irc-bot [options...] <script.lua>
 
 ## Scripting API
 
-A Lua5.1 VM is provided via [yuin/gopher-lua](https://github.com/yuin/gopher-lua) to script the bot.
+A [Lua5.1 VM](http://www.lua.org/manual/5.1/) is provided via [yuin/gopher-lua](https://github.com/yuin/gopher-lua) to script the bot.
 
 A `bot` table is also exposed to control the bot within the VM.
 
-### `bot.write(data)`
+#### bot.write(data)
 
 Send a command to the IRC server.
 
 i.e. `bot.write("JOIN #go-nuts")`
 
-### `bot.on(event, callback(prefix, params))`
+#### bot.on(event, callback(prefix, params))
 
 Bind a handler to a given event.
 
