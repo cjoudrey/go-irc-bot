@@ -7,8 +7,30 @@ import "fmt"
 import "flag"
 
 func main() {
-	var client irc.Client
+	var host = flag.String("host", "irc.freenode.net", "host to connect to")
+	var port = flag.Int("port", 6667, "port to connect to")
+	var nickname = flag.String("nickname", "go-irc-bot", "nickname")
+	var ident = flag.String("ident", "go-irc-bot", "ident")
+	var realname = flag.String("realname", "go-irc-bot", "realname")
+
+	flag.Parse()
+
+	if flag.Arg(0) == "" {
+		fmt.Fprintf(os.Stderr, "Usage: %s [options...] <script.lua>\n", os.Args[0])
+		flag.PrintDefaults()
+		return
+	}
+
 	handler := *irc.NewEventHandler()
+
+	client := irc.Client{
+		Host: *host,
+		Port: *port,
+		Nickname: *nickname,
+		Ident:    *ident,
+		Realname: *realname,
+		Handler:  handler,
+	}
 
 	l := lua.NewState()
 	defer l.Close()
@@ -16,16 +38,11 @@ func main() {
 	registerBotTable(l, &client, &handler)
 	registerBotFunctions(l)
 
-	flag.Parse()
-
-	if flag.Arg(0) == "" {
-		fmt.Fprintf(os.Stderr, "Usage: %s <config.lua>\n", os.Args[0])
-		return
-	}
-
 	if err := l.DoFile(flag.Arg(0)); err != nil {
 		panic(err)
 	}
+
+	go client.Connect()
 
 	select {}
 }
@@ -35,21 +52,6 @@ func registerBotTable(l *lua.LState, client *irc.Client, handler *irc.EventHandl
 	bot.RawSet(lua.LString("write"), l.NewFunction(func(l *lua.LState) int {
 		data := l.ToString(1)
 		client.Write(data)
-		return 1
-	}))
-	bot.RawSet(lua.LString("connect"), l.NewFunction(func(l *lua.LState) int {
-		configs := l.ToTable(1)
-
-		client = &irc.Client{
-			Host:     configs.RawGet(lua.LString("host")).String(),
-			Port:     int(configs.RawGet(lua.LString("port")).(lua.LNumber)),
-			Nickname: configs.RawGet(lua.LString("nickname")).String(),
-			Ident:    configs.RawGet(lua.LString("ident")).String(),
-			Realname: configs.RawGet(lua.LString("realname")).String(),
-			Handler:  *handler,
-		}
-
-		go client.Connect()
 		return 1
 	}))
 	bot.RawSet(lua.LString("on"), l.NewFunction(func(l *lua.LState) int {

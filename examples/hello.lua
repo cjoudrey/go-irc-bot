@@ -1,12 +1,4 @@
-bot.connect({
-  host="irc.freenode.net",
-  port=6667,
-  nickname="Chris55555555",
-  ident="chris1",
-  realname="chris11"
-})
-
-local inspect = require("inspect")
+local inspect = require("examples/inspect")
 
 bot.on("JOIN", function(prefix, target)
   bot.privmsg(target, "Hey " .. prefix)
