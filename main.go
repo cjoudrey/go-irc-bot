@@ -42,6 +42,8 @@ func main() {
 		panic(err)
 	}
 
+	fmt.Printf("Connecting to %s:%d as %s\n", *host, *port, *nickname)
+
 	go client.Connect()
 
 	select {}
