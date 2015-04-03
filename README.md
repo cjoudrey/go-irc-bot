@@ -13,6 +13,7 @@ go-irc-bot [options...] <script.lua>
 -nickname="go-irc-bot": nickname
 -port=6667: port to connect to
 -realname="go-irc-bot": realname
+-secure=false: connect over tls
 ```
 
 ## Scripting API

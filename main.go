@@ -12,6 +12,7 @@ func main() {
 	var nickname = flag.String("nickname", "go-irc-bot", "nickname")
 	var ident = flag.String("ident", "go-irc-bot", "ident")
 	var realname = flag.String("realname", "go-irc-bot", "realname")
+	var secure = flag.Bool("secure", false, "connect over tls")
 
 	flag.Parse()
 
@@ -29,6 +30,7 @@ func main() {
 		Nickname: *nickname,
 		Ident:    *ident,
 		Realname: *realname,
+		Secure: *secure,
 		Handler:  handler,
 	}
 
