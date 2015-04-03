@@ -13,6 +13,7 @@ func main() {
 	var ident = flag.String("ident", "go-irc-bot", "ident")
 	var realname = flag.String("realname", "go-irc-bot", "realname")
 	var secure = flag.Bool("secure", false, "connect over tls")
+	var password = flag.String("password", "", "password")
 
 	flag.Parse()
 
@@ -25,12 +26,13 @@ func main() {
 	handler := *irc.NewEventHandler()
 
 	client := irc.Client{
-		Host: *host,
-		Port: *port,
+		Host:     *host,
+		Port:     *port,
 		Nickname: *nickname,
 		Ident:    *ident,
 		Realname: *realname,
-		Secure: *secure,
+		Secure:   *secure,
+		Password: *password,
 		Handler:  handler,
 	}
 

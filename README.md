@@ -8,12 +8,13 @@
 
 ```
 go-irc-bot [options...] <script.lua>
--host="irc.freenode.net": host to connect to
--ident="go-irc-bot": ident
--nickname="go-irc-bot": nickname
--port=6667: port to connect to
--realname="go-irc-bot": realname
--secure=false: connect over tls
+  -host="irc.freenode.net": host to connect to
+  -ident="go-irc-bot": ident
+  -nickname="go-irc-bot": nickname
+  -password="": password
+  -port=6667: port to connect to
+  -realname="go-irc-bot": realname
+  -secure=false: connect over tls
 ```
 
 ## Scripting API
