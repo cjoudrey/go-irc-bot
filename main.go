@@ -103,9 +103,9 @@ bot.privmsg = function(target, message)
 	bot.write("PRIVMSG " .. target .. " :" .. message)
 end
 
-bot.on("PING", function(prefix, params)
-	bot.write("PONG " .. params[1])
-end)
+bot.notice = function(target, message)
+	bot.write("NOTICE " .. target .. " :" .. message)
+end
 	`); err != nil {
 		panic(err)
 	}
