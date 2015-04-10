@@ -55,9 +55,9 @@ func main() {
 
 	fmt.Printf("Connecting to %s:%d as %s\n", *host, *port, *nickname)
 
-	client.Connect()
+	err := client.Connect()
 
-	select {}
+	panic(err)
 }
 
 func registerBotTable(l *lua.LState, client *irc.Client, handler *irc.EventHandler) {
